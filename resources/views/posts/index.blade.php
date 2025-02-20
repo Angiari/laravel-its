@@ -19,8 +19,9 @@
     </a>
 </div>
 </form>
+@if($posts->count() > 0)
     <table class="min-w-full divide-y divide-gray-200 shadow-lg rounded-lg">
-        <thead class="bg-gray-100">
+        <thead class="bg-gray-100"> 
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Title</th>
@@ -42,14 +43,19 @@
                         <a href="{{ route('edit-post', $post->id) }}" class="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:outline-none transition duration-200 ease-in-out" role="button">
                             Modifica
                         </a>
-                        <a href="{{ route('delete-post', $post->id) }}" class="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:outline-none transition duration-200 ease-in-out" role="button">
-                            Elimina
-                        </a>
+                        <form action="{{ route('delete-post', $post->id) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare questo post?');" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:outline-none transition duration-200 ease-in-out">
+                                Elimina
+                            </button>
+                        </form>
                          
                     </td>
                     
             @endforeach
         </tbody>
     </table>
+    @endif
 </div>
 @endsection

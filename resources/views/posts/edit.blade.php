@@ -16,6 +16,7 @@
                     value="{{ $post->title }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 >
+                <span>{{$errors->first('title')}}</span>
             </div>
 
             <div>
@@ -27,14 +28,15 @@
                     value="{{ $post->description }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 >
+                <span>{{$errors->first('description')}}</span>
             </div>
 
             <div>
                 <label for="long_description" class="block text-sm font-medium text-gray-700">Descrizione Completa</label>
                 <textarea id="long_description" name="long_description" placeholder="Scrivi qui la descrizione completa"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 h-32 resize-none"
-
                 >{{$post->long_description}}</textarea>
+                <span>{{$errors->first('long_description')}}</span>
             </div>
 
             <button type="submit" class="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
