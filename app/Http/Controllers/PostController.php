@@ -30,4 +30,23 @@ class PostController extends Controller
         $post->save();
         return redirect('posts');
     }
+
+    public function edit($id){
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function updatePost($id, Request $request){
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'long_description' => 'required'
+        ]);
+        $post = Post::findOrFail($id);
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+        $post->long_description = $request->input('long_description');
+        $post->save();
+        return redirect('posts');
+    }
 }
