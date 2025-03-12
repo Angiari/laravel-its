@@ -38,6 +38,16 @@
                 >{{$post->long_description}}</textarea>
                 <span>{{$errors->first('long_description')}}</span>
             </div>
+            <div>
+                <label for="long_description" class="block text-sm font-medium text-gray-700">Tag</label>
+                <select name="tags[]" multiple class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 h-20 resize-none">
+                    @foreach(App\Models\Tag::get() as $tag)
+                        <option value="{{ $tag->id }}">
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
             <button type="submit" class="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 Salva Modifica

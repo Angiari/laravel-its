@@ -29,6 +29,7 @@
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Created At</th>
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Updated At</th>
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Creato da:</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tags</th>
                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Azioni</th>
             </tr>
         </thead>
@@ -43,12 +44,20 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($post->user)
                             <a href="{{ route('user', $post->user->id) }}">
-                                {{ $post->user->id }}
+                                {{ $post->user->name }}
                             </a>
                         @else
                             -
                         @endif
                     </td>
+                    <td>
+                        {{$post->tags->pluck('name')->join(',')}}
+                    </td>
+                 {{--    <td>
+                        @foreach($post->tags as $tag)
+                          <span>{{$tag->name}} </span>  
+                        @endforeach
+                    </td> --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <a href="{{ route('edit-post', $post->id) }}" class="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:outline-none transition duration-200 ease-in-out" role="button">
                             Modifica
