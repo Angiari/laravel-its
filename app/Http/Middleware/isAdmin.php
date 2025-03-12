@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class isAdmin
 {
@@ -15,7 +16,9 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        /* dd('Prova'); */
-        return $next($request);
+        if(Auth::user() && Auth::user()->is_admin){
+            return $next($request);
+        }
+        abort(403, 'utente non autorizzato');
     }
 }

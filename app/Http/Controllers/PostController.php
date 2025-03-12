@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PostCreatedMail;
 
 
 class PostController extends Controller
@@ -28,7 +30,12 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->long_description = $request->input('long_description');
+        $post->user_id = auth()->user()->id;
         $post->save();
+
+        Mail::queue(new PostCreatedMail($post));
+
+
         return redirect('posts');
     }
 
